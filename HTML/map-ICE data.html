@@ -1,0 +1,55 @@
+<style>body {background: white}</style><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Untitled</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="CoolUtils HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #FFFFFF; }
+.python1-classname { color: #000080; font-weight: bold; }
+.python1-comment { color: #808080; font-style: italic; }
+.python1-commentedcode { color: #C0C0C0; font-style: italic; }
+.python1-documentation { color: #CC00FF; }
+.python1-float { color: #008080; }
+.python1-functionname { color: #008080; font-weight: bold; }
+.python1-hexadecimal { color: #008080; }
+.python1-identifier { color: #000000; }
+.python1-matchingbrace { color: #0000FF; font-weight: bold; }
+.python1-multi-linestring { color: #808000; }
+.python1-nonreservedkeyword { color: #000080; }
+.python1-number { color: #008080; }
+.python1-octal { color: #008080; }
+.python1-reservedword { font-weight: bold; }
+.python1-space { color: #C0C0C0; }
+.python1-string { color: #808000; }
+.python1-symbol { color: #800000; }
+.python1-syntaxerror { color: #FF0000; }
+.python1-systemfunctionsandvariables { font-weight: bold; }
+.python1-unbalancedbrace { color: #FFFF00; }
+-->
+</style>
+</head>
+<body>
+<!--StartFragment--><pre><code><span class="python1-comment">#%%
+</span><span class="python1-reservedword">import</span><span class="python1-space"> </span><span class="python1-identifier">pandas</span><span class="python1-space"> </span><span class="python1-reservedword">as</span><span class="python1-space"> </span><span class="python1-identifier">pd
+
+df</span><span class="python1-space"> </span><span class="python1-symbol">=</span><span class="python1-space"> </span><span class="python1-identifier">pd</span><span class="python1-symbol">.</span><span class="python1-identifier">read_csv</span><span class="python1-symbol">(</span><span class="python1-string">'movie_metadata.csv'</span><span class="python1-symbol">)
+
+</span><span class="python1-comment"># Drop rows without year or country
+</span><span class="python1-identifier">df</span><span class="python1-space"> </span><span class="python1-symbol">=</span><span class="python1-space"> </span><span class="python1-identifier">df</span><span class="python1-symbol">.</span><span class="python1-identifier">dropna</span><span class="python1-symbol">(</span><span class="python1-identifier">subset</span><span class="python1-symbol">=[</span><span class="python1-string">'title_year'</span><span class="python1-symbol">,</span><span class="python1-space"> </span><span class="python1-string">'country'</span><span class="python1-symbol">,</span><span class="python1-space"> </span><span class="python1-string">'genres'</span><span class="python1-symbol">])
+
+</span><span class="python1-identifier">df</span><span class="python1-symbol">[</span><span class="python1-string">'title_year'</span><span class="python1-symbol">]</span><span class="python1-space"> </span><span class="python1-symbol">=</span><span class="python1-space"> </span><span class="python1-identifier">df</span><span class="python1-symbol">[</span><span class="python1-string">'title_year'</span><span class="python1-symbol">].</span><span class="python1-identifier">astype</span><span class="python1-symbol">(</span><span class="python1-nonreservedkeyword">int</span><span class="python1-symbol">)
+
+</span><span class="python1-comment"># ---- Multi-genre explode ----
+</span><span class="python1-identifier">df</span><span class="python1-symbol">[</span><span class="python1-string">'genre_list'</span><span class="python1-symbol">]</span><span class="python1-space"> </span><span class="python1-symbol">=</span><span class="python1-space"> </span><span class="python1-identifier">df</span><span class="python1-symbol">[</span><span class="python1-string">'genres'</span><span class="python1-symbol">].</span><span class="python1-identifier">str</span><span class="python1-symbol">.</span><span class="python1-identifier">split</span><span class="python1-symbol">(</span><span class="python1-string">'|'</span><span class="python1-symbol">)
+</span><span class="python1-identifier">df_exploded</span><span class="python1-space"> </span><span class="python1-symbol">=</span><span class="python1-space"> </span><span class="python1-identifier">df</span><span class="python1-symbol">.</span><span class="python1-identifier">explode</span><span class="python1-symbol">(</span><span class="python1-string">'genre_list'</span><span class="python1-symbol">)
+
+</span><span class="python1-comment"># Export to CSV for Tableau
+</span><span class="python1-identifier">df_exploded</span><span class="python1-symbol">[[</span><span class="python1-string">'movie_title'</span><span class="python1-symbol">,</span><span class="python1-space"> </span><span class="python1-string">'country'</span><span class="python1-symbol">,</span><span class="python1-space"> </span><span class="python1-string">'title_year'</span><span class="python1-symbol">,</span><span class="python1-space"> </span><span class="python1-string">'genre_list'</span><span class="python1-symbol">,</span><span class="python1-string">'imdb_score'</span><span class="python1-symbol">]].</span><span class="python1-identifier">to_csv</span><span class="python1-symbol">(
+</span><span class="python1-space">    </span><span class="python1-string">'movies_ratings_by_country.csv'</span><span class="python1-symbol">,
+</span><span class="python1-space">    </span><span class="python1-identifier">index</span><span class="python1-symbol">=</span><span class="python1-nonreservedkeyword">False
+</span><span class="python1-symbol">)
+</span></code></pre><!--EndFragment--></body>
+</html>
